@@ -1,14 +1,13 @@
 // Wrapper for LTR styles
-// Defaults to true for scoped styles in Vue components, pass false for global styles
 @mixin dir-ltr($use-host-context: true) {
   @if $use-host-context {
-    // For scoped styles in Vue components, use :deep()
-    :deep([dir='ltr']) & {
+    // For scoped styles in Vue components - look for dir attribute on any parent element
+    [dir='ltr'] & {
       @content;
     }
   } @else {
-    // For global styles
-    [dir='ltr'] & {
+    // For global styles - wrap content in [dir='ltr'] selector
+    [dir='ltr'] {
       @content;
     }
   }
@@ -17,13 +16,13 @@
 // Wrapper for RTL styles
 @mixin dir-rtl($use-host-context: true) {
   @if $use-host-context {
-    // For scoped styles in Vue components, use :deep()
-    :deep([dir='rtl']) & {
+    // For scoped styles in Vue components - look for dir attribute on any parent element
+    [dir='rtl'] & {
       @content;
     }
   } @else {
-    // For global styles
-    [dir='rtl'] & {
+    // For global styles - wrap content in [dir='rtl'] selector
+    [dir='rtl'] {
       @content;
     }
   }
@@ -178,4 +177,3 @@
     transform: scaleX(-1);
   }
 }
-
