@@ -1,0 +1,178 @@
+// Wrapper for LTR styles
+// In Vue, we don't use :host-context, so $use-host-context defaults to false
+@mixin dir-ltr($use-host-context: false) {
+  @if $use-host-context {
+    // For scoped styles in Vue components, use :deep() if needed
+    :deep([dir='ltr']) & {
+      @content;
+    }
+  } @else {
+    [dir='ltr'] & {
+      @content;
+    }
+  }
+}
+
+// Wrapper for RTL styles
+@mixin dir-rtl($use-host-context: false) {
+  @if $use-host-context {
+    :deep([dir='rtl']) & {
+      @content;
+    }
+  } @else {
+    [dir='rtl'] & {
+      @content;
+    }
+  }
+}
+
+// padding-start / padding-end
+@mixin padding-start($value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    padding-right: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    padding-left: $value;
+  }
+}
+
+@mixin padding-end($value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    padding-left: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    padding-right: $value;
+  }
+}
+
+// margin-start / margin-end
+@mixin margin-start($value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    margin-right: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    margin-left: $value;
+  }
+}
+
+@mixin margin-end($value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    margin-left: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    margin-right: $value;
+  }
+}
+
+// float(start|end)
+@mixin float($pos, $use-host-context: false) {
+  @if $pos == start {
+    @include dir-ltr($use-host-context) {
+      float: right;
+    }
+    @include dir-rtl($use-host-context) {
+      float: left;
+    }
+  } @else if $pos == end {
+    @include dir-ltr($use-host-context) {
+      float: left;
+    }
+    @include dir-rtl($use-host-context) {
+      float: right;
+    }
+  }
+}
+
+// Position helpers
+@mixin left($value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    left: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    right: $value;
+  }
+}
+
+@mixin right($value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    right: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    left: $value;
+  }
+}
+
+// Text alignment
+@mixin text-align-start($use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    text-align: left;
+  }
+  @include dir-rtl($use-host-context) {
+    text-align: right;
+  }
+}
+
+@mixin text-align-end($use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    text-align: right;
+  }
+  @include dir-rtl($use-host-context) {
+    text-align: left;
+  }
+}
+
+// Apply styles for one direction explicitly
+@mixin dir($value, $use-host-context: false) {
+  @if $value == ltr {
+    @include dir-ltr($use-host-context) { @content; }
+  } @else if $value == rtl {
+    @include dir-rtl($use-host-context) { @content; }
+  }
+}
+
+// Logical start / end helpers
+@mixin start($property, $value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    #{$property}-right: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    #{$property}-left: $value;
+  }
+}
+
+@mixin end($property, $value, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    #{$property}-left: $value;
+  }
+  @include dir-rtl($use-host-context) {
+    #{$property}-right: $value;
+  }
+}
+
+// Translate with X-axis inversion for RTL
+@mixin transformTranslate($x, $y: 0, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    transform: translate($x, $y);
+  }
+  @include dir-rtl($use-host-context) {
+    transform: translate(-$x, $y);
+  }
+}
+
+// Scale with X-axis mirroring
+@mixin transformScale($x, $y: 1, $use-host-context: false) {
+  @include dir-ltr($use-host-context) {
+    transform: scale($x, $y);
+  }
+  @include dir-rtl($use-host-context) {
+    transform: scale(-$x, $y);
+  }
+}
+
+// Full horizontal mirroring
+@mixin mirror($use-host-context: false) {
+  @include dir-rtl($use-host-context) {
+    transform: scaleX(-1);
+  }
+}
+

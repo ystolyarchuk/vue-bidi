@@ -1,0 +1,61 @@
+{
+  "name": "vue-bidi",
+  "version": "1.0.0",
+  "description": "Vue 3 LTR/RTL direction handler with SCSS utilities",
+  "author": "ystolyarchuk",
+  "license": "MIT",
+  "type": "module",
+  "main": "./fesm2022/vue-bidi.mjs",
+  "module": "./fesm2022/vue-bidi.mjs",
+  "types": "./index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./fesm2022/vue-bidi.mjs",
+      "types": "./index.d.ts"
+    },
+    "./scss": {
+      "default": "./scss/_index.scss"
+    },
+    "./scss/*": {
+      "default": "./scss/*.scss"
+    }
+  },
+  "files": [
+    "fesm2022",
+    "index.d.ts",
+    "scss",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "rtl",
+    "ltr",
+    "bidi",
+    "direction",
+    "scss",
+    "text-direction",
+    "multilingual",
+    "i18n",
+    "localization",
+    "internationalization",
+    "language",
+    "layout",
+    "directive",
+    "composable"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ystolyarchuk/vue-bidi.git"
+  },
+  "homepage": "https://github.com/ystolyarchuk/vue-bidi#readme",
+  "bugs": {
+    "url": "https://github.com/ystolyarchuk/vue-bidi/issues"
+  }
+}
+

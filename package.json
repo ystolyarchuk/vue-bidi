@@ -1,0 +1,50 @@
+{
+  "name": "vue-bidi-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "vite build && npm run copy:all",
+    "type-check": "vue-tsc --noEmit -p projects/vue-bidi/tsconfig.json",
+    "copy:all": "cp ./README.md dist/vue-bidi/ && cp projects/vue-bidi/package.json dist/vue-bidi/ && cp projects/vue-bidi/CHANGELOG.md dist/vue-bidi/ && mkdir -p dist/vue-bidi/scss && cp -r projects/vue-bidi/src/scss/* dist/vue-bidi/scss/ && (cd dist/vue-bidi && if [ -f vue-bidi.d.mts.d.ts ]; then mv vue-bidi.d.mts.d.ts index.d.ts; fi && rm -f vue-bidi.d.mts)",
+    "public": "cd dist/vue-bidi && npm publish --access public",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "@vitest/coverage-v8": "^1.6.1",
+    "@vitest/ui": "^1.6.1",
+    "@vue/test-utils": "^2.4.0",
+    "jsdom": "^23.0.0",
+    "sass": "^1.69.0",
+    "typescript": "^5.8.0",
+    "vite": "^5.4.0",
+    "vite-plugin-dts": "^3.6.0",
+    "vitest": "^1.6.1",
+    "vue": "^3.4.0",
+    "vue-tsc": "^3.1.5"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "rtl",
+    "ltr",
+    "bidi",
+    "direction",
+    "scss",
+    "text-direction",
+    "multilingual",
+    "i18n",
+    "localization",
+    "internationalization",
+    "language",
+    "layout",
+    "directive",
+    "composable"
+  ]
+}

@@ -1,0 +1,16 @@
+src
+.vscode
+.idea
+*.log
+node_modules
+coverage
+*.tsbuildinfo
+.gitignore
+.npmignore
+vitest.config.ts
+vite.config.ts
+tsconfig.json
+*.spec.ts
+*.test.ts
+test
+
