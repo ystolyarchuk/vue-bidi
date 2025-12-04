@@ -1,6 +1,6 @@
 {
   "name": "vue-bidi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vue 3 LTR/RTL direction handler with SCSS utilities",
   "author": "ystolyarchuk",
   "license": "MIT",
@@ -41,7 +41,6 @@
     "scss",
     "text-direction",
     "multilingual",
-    "i18n",
     "localization",
     "internationalization",
     "language",

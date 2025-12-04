@@ -1,12 +1,13 @@
 // Wrapper for LTR styles
-// In Vue, we don't use :host-context, so $use-host-context defaults to false
-@mixin dir-ltr($use-host-context: false) {
+// Defaults to true for scoped styles in Vue components, pass false for global styles
+@mixin dir-ltr($use-host-context: true) {
   @if $use-host-context {
-    // For scoped styles in Vue components, use :deep() if needed
+    // For scoped styles in Vue components, use :deep()
     :deep([dir='ltr']) & {
       @content;
     }
   } @else {
+    // For global styles
     [dir='ltr'] & {
       @content;
     }
@@ -14,12 +15,14 @@
 }
 
 // Wrapper for RTL styles
-@mixin dir-rtl($use-host-context: false) {
+@mixin dir-rtl($use-host-context: true) {
   @if $use-host-context {
+    // For scoped styles in Vue components, use :deep()
     :deep([dir='rtl']) & {
       @content;
     }
   } @else {
+    // For global styles
     [dir='rtl'] & {
       @content;
     }
@@ -27,7 +30,7 @@
 }
 
 // padding-start / padding-end
-@mixin padding-start($value, $use-host-context: false) {
+@mixin padding-start($value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     padding-right: $value;
   }
@@ -36,7 +39,7 @@
   }
 }
 
-@mixin padding-end($value, $use-host-context: false) {
+@mixin padding-end($value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     padding-left: $value;
   }
@@ -46,7 +49,7 @@
 }
 
 // margin-start / margin-end
-@mixin margin-start($value, $use-host-context: false) {
+@mixin margin-start($value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     margin-right: $value;
   }
@@ -55,7 +58,7 @@
   }
 }
 
-@mixin margin-end($value, $use-host-context: false) {
+@mixin margin-end($value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     margin-left: $value;
   }
@@ -65,7 +68,7 @@
 }
 
 // float(start|end)
-@mixin float($pos, $use-host-context: false) {
+@mixin float($pos, $use-host-context: true) {
   @if $pos == start {
     @include dir-ltr($use-host-context) {
       float: right;
@@ -84,7 +87,7 @@
 }
 
 // Position helpers
-@mixin left($value, $use-host-context: false) {
+@mixin left($value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     left: $value;
   }
@@ -93,7 +96,7 @@
   }
 }
 
-@mixin right($value, $use-host-context: false) {
+@mixin right($value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     right: $value;
   }
@@ -103,7 +106,7 @@
 }
 
 // Text alignment
-@mixin text-align-start($use-host-context: false) {
+@mixin text-align-start($use-host-context: true) {
   @include dir-ltr($use-host-context) {
     text-align: left;
   }
@@ -112,7 +115,7 @@
   }
 }
 
-@mixin text-align-end($use-host-context: false) {
+@mixin text-align-end($use-host-context: true) {
   @include dir-ltr($use-host-context) {
     text-align: right;
   }
@@ -122,7 +125,7 @@
 }
 
 // Apply styles for one direction explicitly
-@mixin dir($value, $use-host-context: false) {
+@mixin dir($value, $use-host-context: true) {
   @if $value == ltr {
     @include dir-ltr($use-host-context) { @content; }
   } @else if $value == rtl {
@@ -131,7 +134,7 @@
 }
 
 // Logical start / end helpers
-@mixin start($property, $value, $use-host-context: false) {
+@mixin start($property, $value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     #{$property}-right: $value;
   }
@@ -140,7 +143,7 @@
   }
 }
 
-@mixin end($property, $value, $use-host-context: false) {
+@mixin end($property, $value, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     #{$property}-left: $value;
   }
@@ -150,7 +153,7 @@
 }
 
 // Translate with X-axis inversion for RTL
-@mixin transformTranslate($x, $y: 0, $use-host-context: false) {
+@mixin transformTranslate($x, $y: 0, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     transform: translate($x, $y);
   }
@@ -160,7 +163,7 @@
 }
 
 // Scale with X-axis mirroring
-@mixin transformScale($x, $y: 1, $use-host-context: false) {
+@mixin transformScale($x, $y: 1, $use-host-context: true) {
   @include dir-ltr($use-host-context) {
     transform: scale($x, $y);
   }
@@ -170,7 +173,7 @@
 }
 
 // Full horizontal mirroring
-@mixin mirror($use-host-context: false) {
+@mixin mirror($use-host-context: true) {
   @include dir-rtl($use-host-context) {
     transform: scaleX(-1);
   }

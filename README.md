@@ -125,67 +125,67 @@ Import SCSS helpers:
 
 ## Available Mixins
 
-All mixins support scoped styles via optional `$use-host-context` parameter (defaults to `false` for global styles).
+All mixins support scoped styles via optional `$use-host-context` parameter (defaults to `true` for scoped styles in Vue components).
 
 ### Direction Wrappers
 
-- `dir-ltr($use-host-context: false)` - Apply styles only for LTR direction
-- `dir-rtl($use-host-context: false)` - Apply styles only for RTL direction
-- `dir($value, $use-host-context: false)` - Apply styles for specific direction (ltr/rtl)
+- `dir-ltr($use-host-context: true)` - Apply styles only for LTR direction
+- `dir-rtl($use-host-context: true)` - Apply styles only for RTL direction
+- `dir($value, $use-host-context: true)` - Apply styles for specific direction (ltr/rtl)
 
 ### Padding & Margin
 
-- `padding-start($value, $use-host-context: false)` - Padding on start side (right in LTR, left in RTL)
-- `padding-end($value, $use-host-context: false)` - Padding on end side (left in LTR, right in RTL)
-- `margin-start($value, $use-host-context: false)` - Margin on start side (right in LTR, left in RTL)
-- `margin-end($value, $use-host-context: false)` - Margin on end side (left in LTR, right in RTL)
+- `padding-start($value, $use-host-context: true)` - Padding on start side (right in LTR, left in RTL)
+- `padding-end($value, $use-host-context: true)` - Padding on end side (left in LTR, right in RTL)
+- `margin-start($value, $use-host-context: true)` - Margin on start side (right in LTR, left in RTL)
+- `margin-end($value, $use-host-context: true)` - Margin on end side (left in LTR, right in RTL)
 
 ### Float & Clear
 
-- `float($pos, $use-host-context: false)` - Float element to start or end (`start` or `end`)
+- `float($pos, $use-host-context: true)` - Float element to start or end (`start` or `end`)
 
 ### Position
 
-- `left($value, $use-host-context: false)` - Left position (right in RTL)
-- `right($value, $use-host-context: false)` - Right position (left in RTL)
+- `left($value, $use-host-context: true)` - Left position (right in RTL)
+- `right($value, $use-host-context: true)` - Right position (left in RTL)
 
 ### Text Alignment
 
-- `text-align-start($use-host-context: false)` - Align text to start (left in LTR, right in RTL)
-- `text-align-end($use-host-context: false)` - Align text to end (right in LTR, left in RTL)
+- `text-align-start($use-host-context: true)` - Align text to start (left in LTR, right in RTL)
+- `text-align-end($use-host-context: true)` - Align text to end (right in LTR, left in RTL)
 
 ### Transforms
 
-- `transformTranslate($x, $y: 0, $use-host-context: false)` - Translate with X-axis inversion for RTL
-- `transformScale($x, $y: 1, $use-host-context: false)` - Scale with X-axis mirroring for RTL
-- `mirror($use-host-context: false)` - Full horizontal mirroring for RTL
+- `transformTranslate($x, $y: 0, $use-host-context: true)` - Translate with X-axis inversion for RTL
+- `transformScale($x, $y: 1, $use-host-context: true)` - Scale with X-axis mirroring for RTL
+- `mirror($use-host-context: true)` - Full horizontal mirroring for RTL
 
 ### Generic Property Helpers
 
-- `start($property, $value, $use-host-context: false)` - Apply any property to start side
-- `end($property, $value, $use-host-context: false)` - Apply any property to end side
+- `start($property, $value, $use-host-context: true)` - Apply any property to start side
+- `end($property, $value, $use-host-context: true)` - Apply any property to end side
 
 ### Using in Vue components (with scoped styles)
 
-If you're using mixins inside Vue components with scoped styles, you can use `$use-host-context: true`:
+By default, mixins work with scoped styles in Vue components (uses `:deep()`):
 
 ```vue
 <style lang="scss" scoped>
 @use 'vue-bidi/scss' as dir;
 
 .button {
-  @include dir.padding-start(20px, true); // Uses :deep() for scoped styles
+  @include dir.padding-start(20px); // Uses :deep() for scoped styles by default
 }
 </style>
 ```
 
-For global styles, use the default (`false`):
+For global styles, pass `false`:
 
 ```scss
 @use 'vue-bidi/scss' as dir;
 
 .button {
-  @include dir.padding-start(20px); // Uses [dir] selector
+  @include dir.padding-start(20px, false); // Uses [dir] selector for global styles
 }
 ```
 
