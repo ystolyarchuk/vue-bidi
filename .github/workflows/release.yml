@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -106,5 +106,5 @@ jobs:
         if: steps.check-version.outputs.should_publish == 'true' && steps.check-tag.outputs.tag_exists == 'false'
         working-directory: dist/vue-bidi
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM }}
         run: npm publish --access public
